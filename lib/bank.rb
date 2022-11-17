@@ -1,10 +1,12 @@
+require 'date'
+
 class Bank
   attr_reader :balance 
 
   def initialize(balance=0) 
     # Initialises a total balance counter
     @balance = balance
-    @transaction_history = []
+    @all_transactions = []
     # Initialises an array of transactions
   end
 
@@ -40,6 +42,8 @@ class Bank
     # Adds deposit amount to total balance counter
     @balance += deposit_amount
     puts "Your new balance is £#{@balance}."
+    @all_transactions << "+£#{deposit_amount}"
+    puts @all_transactions
     instruction_message
     # Stores date of deposit
   end
@@ -51,14 +55,24 @@ class Bank
     # Removes withdrawal amount from total balance counter
     @balance -= withdrawal_amount
     puts "Your new balance is £#{@balance}."
+    @all_transactions << "-£#{withdrawal_amount}"
+    puts @all_transactions
     instruction_message
     # Stores date of withdrawal
   end
   
   def statement()
-    return "date || credit || debit || balance"\
-          " || || || #{@balance} "
+    # puts "date || credit || debit || balance\n || || || #{@balance}"
     # Returns a bank statement with date, credit, debit and balance columns
+    puts 'date || credit || debit || balance'
+    @all_transactions.map do |transaction| 
+      if transaction.include? "+"
+        puts "date || #{transaction} || || balance"
+      elsif transaction.include? "-"
+        puts "date || || #{transaction} || balance"
+      end
+    end
+    instruction_message
   end
 end
 
@@ -66,3 +80,4 @@ bank = Bank.new
 bank.access
 
 # Didn't TDD the irb functionality. Next step: TDD the statement method.
+# puts DateTime.now

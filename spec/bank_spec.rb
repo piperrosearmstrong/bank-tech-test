@@ -53,4 +53,11 @@ RSpec.describe Bank do
       expect(bank.print_statement()).to include("1500")
     end
   end
+  
+  context "testing the statement method" do
+    it "displays the statement header" do
+      bank = Bank.new
+      expect(bank.print_statement()).to include("date || credit || debit || balance")
+    end
+  end
 end

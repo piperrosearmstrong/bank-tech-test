@@ -42,8 +42,9 @@ class Bank
     # Adds deposit amount to total balance counter
     @balance += deposit_amount
     puts "Your new balance is £#{@balance}."
-    @all_transactions << "+£#{deposit_amount}"
-    puts @all_transactions
+    deposit_date = DateTime::now.to_s 
+    @all_transactions << "#{deposit_date} || +£#{deposit_amount} || || £#{balance}"
+    # puts @all_transactions
     instruction_message
     # Stores date of deposit
   end
@@ -55,8 +56,9 @@ class Bank
     # Removes withdrawal amount from total balance counter
     @balance -= withdrawal_amount
     puts "Your new balance is £#{@balance}."
-    @all_transactions << "-£#{withdrawal_amount}"
-    puts @all_transactions
+    withdrawal_date = DateTime::now.to_s 
+    @all_transactions << "#{withdrawal_date} || || -£#{withdrawal_amount} || £#{balance}"
+    # puts @all_transactions
     instruction_message
     # Stores date of withdrawal
   end
@@ -65,19 +67,21 @@ class Bank
     # puts "date || credit || debit || balance\n || || || #{@balance}"
     # Returns a bank statement with date, credit, debit and balance columns
     puts 'date || credit || debit || balance'
-    @all_transactions.map do |transaction| 
-      if transaction.include? "+"
-        puts "date || #{transaction} || || balance"
-      elsif transaction.include? "-"
-        puts "date || || #{transaction} || balance"
-      end
-    end
+    # @all_transactions.map do |transaction| 
+    #   if transaction.include? "+"
+    #     puts "date || #{transaction} || || balance"
+    #   elsif transaction.include? "-"
+    #     puts "date || || #{transaction} || balance"
+    #   end
+    # end
+    puts @all_transactions.reverse
     instruction_message
   end
 end
+
+# puts DateTime::now.to_s 
 
 bank = Bank.new
 bank.access
 
 # Didn't TDD the irb functionality. Next step: TDD the statement method.
-# puts DateTime.now

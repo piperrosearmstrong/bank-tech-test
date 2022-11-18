@@ -77,7 +77,7 @@ end
 # puts DateTime::now.to_s 
 
 bank = Bank.new
-bank.access
+# bank.access
 
 # Didn't TDD the irb functionality. Next step: TDD the statement method.
 # Didn't TDD the statement method. Next step: Write tests.

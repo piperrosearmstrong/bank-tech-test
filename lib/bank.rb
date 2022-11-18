@@ -42,7 +42,8 @@ class Bank
     # Adds deposit amount to total balance counter
     @balance += deposit_amount
     puts "Your new balance is £#{@balance}."
-    deposit_date = DateTime::now.to_s 
+    dep_time = DateTime::now
+    deposit_date = "#{dep_time.year}/#{dep_time.month}/#{dep_time.day}"
     @all_transactions << "#{deposit_date} || +£#{deposit_amount} || || £#{balance}"
     # puts @all_transactions
     instruction_message
@@ -56,7 +57,8 @@ class Bank
     # Removes withdrawal amount from total balance counter
     @balance -= withdrawal_amount
     puts "Your new balance is £#{@balance}."
-    withdrawal_date = DateTime::now.to_s 
+    with_time = DateTime::now
+    withdrawal_date = "#{with_time.year}/#{with_time.month}/#{with_time.day}" 
     @all_transactions << "#{withdrawal_date} || || -£#{withdrawal_amount} || £#{balance}"
     # puts @all_transactions
     instruction_message
@@ -66,14 +68,7 @@ class Bank
   def statement()
     # puts "date || credit || debit || balance\n || || || #{@balance}"
     # Returns a bank statement with date, credit, debit and balance columns
-    puts 'date || credit || debit || balance'
-    # @all_transactions.map do |transaction| 
-    #   if transaction.include? "+"
-    #     puts "date || #{transaction} || || balance"
-    #   elsif transaction.include? "-"
-    #     puts "date || || #{transaction} || balance"
-    #   end
-    # end
+    puts 'Date || Credit || Debit || Balance'
     puts @all_transactions.reverse
     instruction_message
   end
@@ -85,3 +80,4 @@ bank = Bank.new
 bank.access
 
 # Didn't TDD the irb functionality. Next step: TDD the statement method.
+# Didn't TDD the statement method. Next step: Write tests.
